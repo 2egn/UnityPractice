@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public float maxSpeed;
+    public float jumpPower;
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
@@ -15,9 +16,12 @@ public class PlayerMove : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();   
         anim = GetComponent<Animator>();
     }
-
+    //단발적인 업데이트들은 Update에 쓰는것을 추천
     void Update()
     {
+        //Jump
+        if(Input.GetButton("Jump"))
+            rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         //slip prevent
         if(Input.GetButtonUp("Horizontal")) {
             rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.000000000001f, rigid.velocity.y);
