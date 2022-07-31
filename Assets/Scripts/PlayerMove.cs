@@ -13,6 +13,7 @@ public class PlayerMove : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();   
         spriteRenderer = GetComponent<SpriteRenderer>();   
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -24,6 +25,11 @@ public class PlayerMove : MonoBehaviour
         //Change Facing direction
         if(Input.GetButton("Horizontal"))
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
+        //Animation
+        if (rigid.velocity.normalized.x == 0)
+            anim.SetBool("isWalking", false);
+        else
+            anim.SetBool("isWalking", true);
 
     }
     // Update is called once per frame
