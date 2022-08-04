@@ -23,6 +23,7 @@ public class PlayerMove : MonoBehaviour
         if(Input.GetButtonDown("Jump") && !anim.GetBool("isJumping")){
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             anim.SetBool("isJumping", true);
+            //anim.SetBool("isKeyJumping", true);
         }
 
         //slip prevent
@@ -32,11 +33,16 @@ public class PlayerMove : MonoBehaviour
         //Change Facing direction
         if(Input.GetButton("Horizontal"))
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
-        //Animation
+        //Walking Animation
         if (rigid.velocity.normalized.x == 0)
             anim.SetBool("isWalking", false);
         else
             anim.SetBool("isWalking", true);
+        /*//Float Animation
+         if(rigid.velocity.y < 0 && !anim.GetBool("isKeyJumping")) {
+            anim.SetBool("isJumping", true);
+         }
+         else anim.SetBool("isJumping", false); */
 
     }
     // Update is called once per frame
@@ -57,6 +63,7 @@ public class PlayerMove : MonoBehaviour
             if (rayHit.collider != null){ //만약맞았으면
                 if (rayHit.distance < 0.5f) //0.5의 float변수(0.5길이만큼의 레이에맞았으면)
                     anim.SetBool("isJumping", false);//점프변수를 false로바꿔서 다시 대기나 달리기 애니메이션으로 돌림
+                    //anim.SetBool("isKeyJumping", false); //레비테이팅 확인용
             }
         }
     }
