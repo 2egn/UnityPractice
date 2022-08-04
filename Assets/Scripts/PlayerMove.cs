@@ -55,7 +55,7 @@ public class PlayerMove : MonoBehaviour
             Debug.DrawRay(rigid.position, Vector3.down, new Color(0,1,0)); //대충레이캐스트하는거
             RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Platform"));//대충 Platform이라는 레이어에 맞는지확인하는거인듯??
             if (rayHit.collider != null){ //만약맞았으면
-                if (rayHit.distance < 0.5f) //0.5의 float변수(0.5길이만큼에 레이에맞았으면)
+                if (rayHit.distance < 0.5f) //0.5의 float변수(0.5길이만큼의 레이에맞았으면)
                     anim.SetBool("isJumping", false);//점프변수를 false로바꿔서 다시 대기나 달리기 애니메이션으로 돌림
             }
         }
